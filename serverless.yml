@@ -1,0 +1,26 @@
+app: serverless-youtube
+service: serverless-youtube
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  architecture: x86_64
+  runtime: nodejs16.x
+
+functions:
+  list-user:
+    handler: src/list-user.handler
+    events:
+      - httpApi:
+          path: /users
+          method: get
+  create-user:
+    handler: src/create-user.handler
+    events:
+      - httpApi:
+          path: /users
+          method: post
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-typescript
